@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App</title>
+</head>
+<body>
+
+    <!-- Text area where user writes notes -->
+    <textarea id="noteArea" rows="10" cols="40" placeholder="Write your notes here..."></textarea>
+    <br><br>
+
+    <!-- Buttons -->
+    <button id="saveBtn">Save Notes</button>
+    <button id="loadBtn">Load Notes</button>
+    <button id="clearBtn">Clear Notes</button>
+
+    <script>
+        const noteArea = document.getElementById("noteArea");
+
+        // ✔ On page load: automatically load saved notes from localStorage
+        window.onload = function () {
+            const savedNotes = localStorage.getItem("notes");
+            if (savedNotes) {
+                noteArea.value = savedNotes;   // Show saved notes in the textarea
+            }
+        };
+
+        // ✔ SAVE NOTES BUTTON
+        document.getElementById("saveBtn").addEventListener("click", function () {
+
+            // Validation: do not save empty text
+            if (noteArea.value.trim() === "") {
+                alert("Cannot save empty notes!");
+                return;
+            }
+
+            // Save text to localStorage
+            localStorage.setItem("notes", noteArea.value);
+            alert("Notes saved!");
+        });
+
+        // ✔ LOAD NOTES BUTTON
+        document.getElementById("loadBtn").addEventListener("click", function () {
+            const savedNotes = localStorage.getItem("notes");
+
+            // If notes exist, load them into textarea
+            if (savedNotes) {
+                noteArea.value = savedNotes;
+            } else {
+                alert("No saved notes found.");
+            }
+        });
+
+        // ✔ CLEAR NOTES BUTTON
+        document.getElementById("clearBtn").addEventListener("click", function () {
+            localStorage.removeItem("notes");  // Delete notes from storage
+            noteArea.value = "";              // Clear textarea
+            alert("All notes cleared!");
+        });
+
+    </script>
+
+</body>
+</html>

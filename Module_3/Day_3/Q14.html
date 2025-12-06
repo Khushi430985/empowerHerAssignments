@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Todo List</h2>
+
+    <!-- Input to add tasks -->
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addBtn">Add Task</button>
+    <br><br>
+
+    <!-- Search -->
+    <input type="text" id="searchInput" placeholder="Search tasks...">
+    <br><br>
+
+    <!-- List where tasks will appear -->
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = []; // Array to store tasks
+
+        // Load tasks from localStorage on page load
+        window.onload = function () {
+            const saved = localStorage.getItem("tasks");
+            if (saved) {
+                tasks = JSON.parse(saved);
+                renderTasks(tasks);
+            }
+        };
+
+        const taskInput = document.getElementById("taskInput");
+        const searchInput = document.getElementById("searchInput");
+        const taskList = document.getElementById("taskList");
+
+        // ADD TASK
+        document.getElementById("addBtn").addEventListener("click", function () {
+            const text = taskInput.value.trim();
+            if (text === "") return alert("Task cannot be empty!");
+
+            // Create a task object
+            const newTask = {
+                id: Date.now(),   // Unique ID
+                text: text,
+                completed: false
+            };
+
+            tasks.push(newTask);
+            saveTasks();
+            renderTasks(tasks);
+
+            taskInput.value = ""; // Clear input
+        });
+
+        // SAVE TO localStorage
+        function saveTasks() {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        // RENDER TASKS
+        function renderTasks(list) {
+            taskList.innerHTML = ""; // Clear UI first
+
+            list.forEach(task => {
+                const li = document.createElement("li");
+
+                // Add completed style visually
+                if (task.completed) {
+                    li.classList.add("completed");
+                }
+
+                li.textContent = task.text;
+
+                // CLICK TO TOGGLE COMPLETE
+                li.addEventListener("click", function () {
+                    task.completed = !task.completed;
+                    saveTasks();
+                    renderTasks(tasks);
+                });
+
+                // DELETE BUTTON
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "X";
+                delBtn.style.marginLeft = "10px";
+                delBtn.addEventListener("click", function (event) {
+                    event.stopPropagation(); // stop click from toggling complete
+                    tasks = tasks.filter(t => t.id !== task.id);
+                    saveTasks();
+                    renderTasks(tasks);
+                });
+
+                li.appendChild(delBtn);
+                taskList.appendChild(li);
+            });
+        }
+
+        // SEARCH FUNCTIONALITY
+        searchInput.addEventListener("input", function () {
+            const keyword = searchInput.value.toLowerCase();
+
+            const filtered = tasks.filter(task =>
+                task.text.toLowerCase().includes(keyword)
+            );
+
+            renderTasks(filtered);
+        });
+
+    </script>
+</body>
+</html>
