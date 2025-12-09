@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Book Management (Firestore)</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Add Book</h2>
+      <form id="addBookForm">
+        <input id="title" placeholder="Title" required />
+        <input id="author" placeholder="Author" required />
+        <input id="price" type="number" placeholder="Price" required />
+        <input id="coverImageURL" placeholder="Cover Image URL" required />
+        <button type="submit">Add Book</button>
+      </form>
+
+      <hr />
+      <h3>Notes</h3>
+      <ul>
+        <li>Add sample books using the form.</li>
+        <li>Update author with Update button.</li>
+        <li>Delete removes book from Firestore.</li>
+      </ul>
+    </aside>
+
+    <main class="main-area">
+      <div id="booksGrid" class="grid"></div>
+    </main>
+  </div>
+
+  <!-- app script (module) -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
