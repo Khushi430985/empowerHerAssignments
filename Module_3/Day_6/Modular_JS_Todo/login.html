@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login - Modular Todos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="nav-root"></div>
+
+  <main class="container card">
+    <h2>Login</h2>
+    <form id="login-form" class="form">
+      <label>
+        Email
+        <input type="email" id="email" required />
+      </label>
+      <label>
+        Password
+        <input type="password" id="password" required />
+      </label>
+
+      <div class="form-actions">
+        <button class="btn" type="submit">Login</button>
+        <a class="btn btn-link" href="signup.html">Create account</a>
+      </div>
+      <p id="msg" class="msg"></p>
+    </form>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script type="module">
+    import renderNav from './js/components/navbar.js';
+    import renderFooter from './js/components/footer.js';
+    import { login } from './js/auth.js';
+
+    renderNav(document.getElementById('nav-root'));
+    renderFooter(document.getElementById('footer-root'));
+
+    const form = document.getElementById('login-form');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const result = login({ email, password });
+
+      msg.textContent = result.message;
+      msg.className = result.success ? 'msg success' : 'msg error';
+
+      if (result.success) {
+        // on success redirect to todos
+        location.href = 'todos.html';
+      }
+    });
+  </script>
+</body>
+</html>

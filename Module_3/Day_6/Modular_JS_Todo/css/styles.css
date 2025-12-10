@@ -1,0 +1,51 @@
+/* Reset-ish */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif}
+body{background:#f5f7fb;color:#111}
+
+/* Layout helpers */
+.container{max-width:900px;margin:32px auto;padding:20px}
+.card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 6px 18px rgba(15,20,30,0.06)}
+.center{text-align:center}
+.small{font-size:0.85rem;color:#666}
+
+/* Nav */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:#fff;border-bottom:1px solid #eee;box-shadow:0 2px 8px rgba(12,15,20,0.03)}
+.brand{font-weight:700;color:#1b1b1b;text-decoration:none}
+.nav-right a{margin-left:14px;color:#333;text-decoration:none;font-weight:500}
+.nav-right a:hover{text-decoration:underline}
+
+/* Footer */
+.footer{margin-top:40px;padding:18px;text-align:center;color:#666;font-size:0.9rem}
+
+/* Buttons */
+.btn{display:inline-block;padding:10px 16px;border-radius:8px;background:#0b74ff;color:#fff;text-decoration:none;border:none;cursor:pointer;font-weight:600}
+.btn-outline{background:transparent;border:1px solid #0b74ff;color:#0b74ff}
+.btn-link{background:transparent;color:#0b74ff;border:none;text-decoration:underline;padding:0 6px}
+.btn-danger{background:#ff4d4f}
+
+/* Forms */
+.form label{display:block;margin-bottom:12px;font-weight:600;color:#333}
+.form input{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:6px}
+.form-actions{display:flex;gap:12px;align-items:center;margin-top:10px}
+
+/* messages */
+.msg{margin-top:10px;font-weight:600}
+.msg.success{color:green}
+.msg.error{color:#c0392b}
+
+/* hero links */
+.hero-links{margin-top:18px}
+.hero-links .btn{margin-right:10px}
+
+/* Todos grid/cards */
+.todos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px}
+.todo-card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 16px rgba(10,12,20,0.04);border:1px solid #f0f0f0}
+.todo-card h4{font-size:1rem;margin-bottom:8px}
+.todo-card.completed{opacity:.7}
+
+/* Responsive */
+@media (max-width:600px){
+  .nav-right{display:none}
+  .container{padding:14px}
+  .form-actions{flex-direction:column;align-items:stretch}
+}

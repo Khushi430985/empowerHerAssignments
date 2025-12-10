@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Signup - Modular Todos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="nav-root"></div>
+
+  <main class="container card">
+    <h2>Create account</h2>
+    <form id="signup-form" class="form">
+      <label>
+        Full name
+        <input type="text" id="name" required />
+      </label>
+      <label>
+        Email
+        <input type="email" id="email" required />
+      </label>
+      <label>
+        Password
+        <input type="password" id="password" minlength="6" required />
+      </label>
+      <label>
+        Confirm password
+        <input type="password" id="confirmPassword" minlength="6" required />
+      </label>
+
+      <div class="form-actions">
+        <button class="btn" type="submit">Sign up</button>
+        <a class="btn btn-link" href="login.html">Already have an account? Login</a>
+      </div>
+      <p id="msg" class="msg"></p>
+    </form>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script type="module">
+    import renderNav from './js/components/navbar.js';
+    import renderFooter from './js/components/footer.js';
+    import { signup } from './js/auth.js';
+
+    renderNav(document.getElementById('nav-root'));
+    renderFooter(document.getElementById('footer-root'));
+
+    const form = document.getElementById('signup-form');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      const result = signup({ name, email, password, confirmPassword });
+      msg.textContent = result.message;
+      msg.className = result.success ? 'msg success' : 'msg error';
+
+      if (result.success) {
+        // after signup, redirect to login
+        setTimeout(() => location.href = 'login.html', 800);
+      }
+    });
+  </script>
+</body>
+</html>

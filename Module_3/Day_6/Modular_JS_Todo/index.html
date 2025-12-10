@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Home - Modular Todos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="nav-root"></div>
+
+  <main class="container">
+    <h1>Welcome to Modular Todos</h1>
+    <p>This project demonstrates modular JS, signup/login (localStorage) and fetching/displaying todos.</p>
+
+    <div class="hero-links">
+      <a class="btn" href="signup.html">Sign Up</a>
+      <a class="btn btn-outline" href="login.html">Login</a>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+  <script type="module">
+    import renderNav from './js/components/navbar.js';
+    import renderFooter from './js/components/footer.js';
+    renderNav(document.getElementById('nav-root'));
+    renderFooter(document.getElementById('footer-root'));
+  </script>
+</body>
+</html>

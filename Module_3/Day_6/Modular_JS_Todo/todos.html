@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Todos - Modular Todos</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="nav-root"></div>
+
+  <main class="container">
+    <h2>Your Todos</h2>
+    <div id="user-info"></div>
+    <div id="todos-list" class="todos-grid"></div>
+    <div class="center">
+      <button id="logoutBtn" class="btn btn-danger">Logout</button>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script type="module">
+    import renderNav from './js/components/navbar.js';
+    import renderFooter from './js/components/footer.js';
+    import { protectRoute, logout, getCurrentUser } from './js/auth.js';
+    import { fetchAndRenderTodos } from './js/todos.js';
+
+    renderNav(document.getElementById('nav-root'));
+    renderFooter(document.getElementById('footer-root'));
+
+    // Protect the page: if not logged in, redirect to login
+    protectRoute();
+
+    const user = getCurrentUser();
+    const userInfo = document.getElementById('user-info');
+    userInfo.innerHTML = user ? `<p>Logged in as <strong>${user.name}</strong> (${user.email})</p>` : '';
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      logout();
+      location.href = 'login.html';
+    });
+
+    fetchAndRenderTodos();
+  </script>
+</body>
+</html>
