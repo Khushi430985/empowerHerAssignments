@@ -1,6 +1,7 @@
 import Counter from "./Counter";
 import Calculator from "./Calculator";
 import MessageCard from "./MessageCard";
+import UserProfile from "./UserProfile";
 
 function App() {
   return (
@@ -14,19 +15,11 @@ function App() {
       />
 
       <MessageCard
-        title="React Props"
-        message="Props allow data to be passed to components."
-      />
-
-      <MessageCard
         title="Reusable Component"
-        message="This card component is reused multiple times."
+        message="Props make components reusable."
       />
 
-      <MessageCard
-        title="Assignment Complete"
-        message="Q3 implemented successfully."
-      />
+      <UserProfile />
     </div>
   );
 }
