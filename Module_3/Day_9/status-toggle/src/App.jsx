@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import ComponentA from "./ComponentA";
-import ComponentB from "./ComponentB";
+import React from "react";
+import StatusToggle from "./statusToggle";
+import ColorToggle from "./ColorToggle";
 
 function App() {
-  const [status, setStatus] = useState(false);
-
   return (
     <div>
-      <button onClick={() => setStatus(!status)}>
-        Toggle Status
-      </button>
+      <h2>Q1: Status Toggle</h2>
+      <StatusToggle />
 
-      {status ? <ComponentA /> : <ComponentB />}
+      <hr />
+
+      <h2>Q2: Color Toggle</h2>
+      <ColorToggle />
     </div>
   );
 }
