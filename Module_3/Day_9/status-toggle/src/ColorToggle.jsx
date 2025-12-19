@@ -14,7 +14,7 @@ function ColorToggle() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginBottom: "20px"
+          marginBottom: "10px"
         }}
       >
         Color Box

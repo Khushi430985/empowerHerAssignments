@@ -9,11 +9,9 @@ function StatusToggle() {
         Toggle Status
       </button>
 
-      {status ? (
-        <h3>Status is TRUE</h3>
-      ) : (
-        <h3>Status is FALSE</h3>
-      )}
+      <p>
+        {status ? "Status is TRUE" : "Status is FALSE"}
+      </p>
     </div>
   );
 }
