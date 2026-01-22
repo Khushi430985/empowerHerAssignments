@@ -1,1 +1,125 @@
+=============================
+SQL CRUD OPERATIONS - STUDENTS TABLE
+=============================
+
+--------------------------------
+STEP 1: CREATE TABLE
+--------------------------------
+Query:
+create table students (
+  id serial primary key,
+  name text,
+  email text,
+  age integer,
+  course text,
+  created_at timestamp default now()
+);
+
+Output:
+Success. No rows returned.
+
+
+--------------------------------
+STEP 2: INSERT DATA
+--------------------------------
+Query:
+insert into students (name, email, age, course) values
+('Rahul Sharma', 'rahul@gmail.com', 21, 'BCA'),
+('Anjali Verma', 'anjali@gmail.com', 19, 'BSc'),
+('Amit Kumar', 'amit@gmail.com', 22, 'BTech'),
+('Neha Singh', 'neha@gmail.com', 20, 'BCA'),
+('Priya Patel', 'priya@gmail.com', 23, 'BTech');
+
+Output:
+Success. No rows returned.
+
+
+--------------------------------
+STEP 3: READ OPERATIONS
+--------------------------------
+
+1) Fetch all students
+Query:
+select * from students;
+
+Output:
+ id | name           | email            | age | course | created_at
+----+----------------+------------------+-----+--------+--------------------
+ 1  | Rahul Sharma   | rahul@gmail.com  | 21  | BCA    | timestamp
+ 2  | Anjali Verma   | anjali@gmail.com | 19  | BSc    | timestamp
+ 3  | Amit Kumar     | amit@gmail.com   | 22  | BTech  | timestamp
+ 4  | Neha Singh     | neha@gmail.com   | 20  | BCA    | timestamp
+ 5  | Priya Patel    | priya@gmail.com  | 23  | BTech  | timestamp
+
+
+2) Fetch students older than 20
+Query:
+select * from students where age > 20;
+
+Output:
+ Rahul Sharma, Amit Kumar, Priya Patel
+
+
+3) Fetch only name and email
+Query:
+select name, email from students;
+
+Output:
+ Rahul Sharma  | rahul@gmail.com
+ Anjali Verma  | anjali@gmail.com
+ Amit Kumar    | amit@gmail.com
+ Neha Singh    | neha@gmail.com
+ Priya Patel   | priya@gmail.com
+
+
+4) Fetch students enrolled in BCA
+Query:
+select * from students where course = 'BCA';
+
+Output:
+ Rahul Sharma, Neha Singh
+
+
+--------------------------------
+STEP 4: UPDATE OPERATIONS
+--------------------------------
+
+1) Update age of one student (id = 1)
+Query:
+update students set age = 22 where id = 1;
+
+Output:
+Success. No rows returned.
+
+
+2) Update course for all BCA students to MCA
+Query:
+update students set course = 'MCA' where course = 'BCA';
+
+Output:
+Success. No rows returned.
+
+
+--------------------------------
+STEP 5: DELETE OPERATIONS
+--------------------------------
+
+1) Delete one student using id
+Query:
+delete from students where id = 2;
+
+Output:
+Success. No rows returned.
+
+
+2) Delete all students below age 20
+Query:
+delete from students where age < 20;
+
+Output:
+Success. No rows returned.
+
+=============================
+END OF FILE
+=============================
 
