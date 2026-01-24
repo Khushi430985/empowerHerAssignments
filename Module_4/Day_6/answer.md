@@ -43,3 +43,60 @@ Here:
 - One user → One profile
 
 ### Simple Diagram:
+User 1 ───────── 1 UserProfile
+
+
+### Real-world use:
+- Login data stored in one table and personal details in another table.
+
+---
+
+## 4. One-to-Many Relationship (1:N)
+
+### Definition:
+In a **one-to-many relationship**, one record in Table A can be related to many records in Table B, but one record in Table B is related to only one record in Table A.
+
+### E-commerce Example:
+**Customer and Orders**
+
+- One customer can place many orders.
+- Each order belongs to only one customer.
+
+### Example Tables:
+- `customers (customer_id, name, email)`
+- `orders (order_id, customer_id, order_date)`
+
+### Diagram:
+Orders >───< Order_Items >───< Products
+
+
+### Real-world use:
+- Shopping cart system where one order contains multiple products.
+
+---
+
+## 6. Why Database Relationships Are Important?
+
+- Prevents data duplication  
+- Maintains data integrity  
+- Makes the database organized and scalable  
+- Makes queries more meaningful and efficient  
+- Accurately represents real-world systems  
+
+---
+
+## 7. Conclusion
+
+Database relationships are the **foundation of relational databases**.  
+In an e-commerce application, relationships are used to manage:
+
+- Users and their profiles  
+- Customers and their orders  
+- Orders and products  
+- Products and categories  
+
+Without database relationships, it would not be possible to build reliable systems like Amazon, Flipkart, or any modern online shopping platform.
+
+---
+
+# End of Answer
