@@ -1,0 +1,191 @@
+========================================
+SQL CRUD OPERATIONS WITH RELATIONSHIPS
+========================================
+
+----------------------------------------
+STEP 1: CREATE TABLES WITH RELATIONSHIP
+----------------------------------------
+
+Query:
+create table users (
+  id serial primary key,
+  name text,
+  email text,
+  created_at timestamp default now()
+);
+
+Output:
+Success. No rows returned.
+
+
+Query:
+create table orders (
+  id serial primary key,
+  user_id integer references users(id),
+  amount integer,
+  status text,
+  created_at timestamp default now()
+);
+
+Output:
+Success. No rows returned.
+
+
+----------------------------------------
+STEP 2: INSERT DATA
+----------------------------------------
+
+Insert Users
+Query:
+insert into users (name, email) values
+('Rahul Sharma', 'rahul@gmail.com'),
+('Anjali Verma', 'anjali@gmail.com'),
+('Amit Kumar', 'amit@gmail.com'),
+('Neha Singh', 'neha@gmail.com'),
+('Priya Patel', 'priya@gmail.com');
+
+Output:
+Success. No rows returned.
+
+
+Insert Orders
+Query:
+insert into orders (user_id, amount, status) values
+(1, 500, 'placed'),
+(1, 1200, 'delivered'),
+(2, 700, 'placed'),
+(3, 1500, 'cancelled'),
+(3, 900, 'placed'),
+(3, 400, 'delivered'),
+(4, 2000, 'placed'),
+(5, 300, 'placed'),
+(1, 800, 'delivered');
+
+Output:
+Success. No rows returned.
+
+
+----------------------------------------
+STEP 3: READ DATA (RELATIONAL READS)
+----------------------------------------
+
+1) Fetch all users
+Query:
+select * from users;
+
+Output:
+(All users displayed)
+
+
+2) Fetch all orders
+Query:
+select * from orders;
+
+Output:
+(All orders displayed)
+
+
+3) Fetch all orders for a specific user (user_id = 1)
+Query:
+select * from orders where user_id = 1;
+
+Output:
+(Orders of Rahul Sharma)
+
+
+4) Fetch users who have more than one order
+Query:
+select users.id, users.name, count(orders.id) as total_orders
+from users
+join orders on users.id = orders.user_id
+group by users.id, users.name
+having count(orders.id) > 1;
+
+Output:
+(Rahul Sharma, Amit Kumar)
+
+
+5) Fetch total order amount per user
+Query:
+select users.name, sum(orders.amount) as total_amount
+from users
+join orders on users.id = orders.user_id
+group by users.name;
+
+Output:
+(Total amount per user shown)
+
+
+----------------------------------------
+STEP 4: UPDATE DATA
+----------------------------------------
+
+1) Update email of one user (id = 1)
+Query:
+update users set email = 'rahul_new@gmail.com' where id = 1;
+
+Output:
+Success. No rows returned.
+
+
+2) Update status of all orders of user_id = 3
+Query:
+update orders set status = 'delivered' where user_id = 3;
+
+Output:
+Success. No rows returned.
+
+
+3) Update order amount of one order (id = 1)
+Query:
+update orders set amount = 600 where id = 1;
+
+Output:
+Success. No rows returned.
+
+
+----------------------------------------
+STEP 5: DELETE DATA
+----------------------------------------
+
+1) Delete one order using order id
+Query:
+delete from orders where id = 2;
+
+Output:
+Success. No rows returned.
+
+
+2) Delete all orders of a specific user (user_id = 4)
+Query:
+delete from orders where user_id = 4;
+
+Output:
+Success. No rows returned.
+
+
+3) Attempt deleting a user who has existing orders
+Query:
+delete from users where id = 1;
+
+Output:
+ERROR: update or delete on table "users" violates foreign key constraint on table "orders"
+(Deletion not allowed because orders exist for this user)
+
+
+----------------------------------------
+STEP 6: CONCEPTUAL QUESTION (ANSWER)
+----------------------------------------
+
+-- Why should orders not be stored inside the users table?
+
+-- Because:
+-- One user can have many orders.
+-- Storing orders inside users table will cause data duplication.
+-- It breaks database normalization.
+-- It makes the database unstructured and hard to manage.
+-- Using a separate orders table with a foreign key is clean, scalable and efficient.
+
+========================================
+END OF FILE
+========================================
