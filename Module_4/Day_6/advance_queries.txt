@@ -1,0 +1,141 @@
+========================================
+ADVANCED SQL QUERIES ON STUDENTS TABLE
+========================================
+
+----------------------------------------
+STEP 2: AGGREGATE QUERIES
+----------------------------------------
+
+1) Count total number of students
+Query:
+select count(*) from students;
+
+Output:
+ count
+-------
+ 4
+
+
+2) Find average age of students
+Query:
+select avg(age) from students;
+
+Output:
+ avg
+-------
+ 21.75
+
+
+3) Find minimum and maximum age
+Query:
+select min(age) as min_age, max(age) as max_age from students;
+
+Output:
+ min_age | max_age
+---------+---------
+   20    |   23
+
+
+4) Count how many students are enrolled in each course
+Query:
+select course, count(*) from students group by course;
+
+Output:
+ course | count
+--------+-------
+ MCA    | 2
+ BTech  | 2
+
+
+5) Count students whose age is greater than 20
+Query:
+select count(*) from students where age > 20;
+
+Output:
+ count
+-------
+ 3
+
+
+----------------------------------------
+STEP 3: GROUPING & FILTERING
+----------------------------------------
+
+1) Display course-wise student count
+Query:
+select course, count(*) as student_count
+from students
+group by course;
+
+Output:
+ course | student_count
+--------+---------------
+ MCA    | 2
+ BTech  | 2
+
+
+2) Display only courses where student count is greater than 1
+Query:
+select course, count(*) as student_count
+from students
+group by course
+having count(*) > 1;
+
+Output:
+ course | student_count
+--------+---------------
+ MCA    | 2
+ BTech  | 2
+
+
+3) Display courses sorted by highest student count first
+Query:
+select course, count(*) as student_count
+from students
+group by course
+order by student_count desc;
+
+Output:
+ course | student_count
+--------+---------------
+ MCA    | 2
+ BTech  | 2
+
+
+----------------------------------------
+STEP 4: ORDERING & LIMITING
+----------------------------------------
+
+1) Fetch the latest 3 students based on created_at
+Query:
+select * from students
+order by created_at desc
+limit 3;
+
+Output:
+ (Latest 3 records shown)
+
+
+2) Fetch the top 5 oldest students
+Query:
+select * from students
+order by age desc
+limit 5;
+
+Output:
+ (All students sorted by age descending)
+
+
+3) Fetch students enrolled in a specific course (BTech), sorted by age descending
+Query:
+select * from students
+where course = 'BTech'
+order by age desc;
+
+Output:
+ Priya Patel (23), Amit Kumar (22)
+
+
+========================================
+END OF FILE
+========================================
